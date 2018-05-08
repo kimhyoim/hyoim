@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="./httpRequest.js"></script>
+<script type="text/javascript">
+function goBack() {
+	window.history.back();
+}
+
+function ecd(field) {
+	return encodeURIComponent(field.value);
+}
+
+function send(f) {
+	var params = "id="+ecd(f.id);
+	params += "&passwd="+f.passwd.value;
+	
+	var panel = document.getElementById("displayPanel");
+	panel.innerHTML="";
+	
+	sendRequest("./loginproctest.jsp", params, response, "post");
+}
+
+function response() {
+	if(httpRequest.readyState==4) {
+		if(httpRequest.status==200) {
+			
+			var panel = document.getElementById("displayPanel");
+			panel.innerHTML = httpRequest.responseText;
+			
+		}
+	}
+}
+
+function send2(s) {
+	var params = "site="+s.trim();
+	var panel = document.getElementById("displayPanel2");
+	panel.innerHTML="";
+	
+	sendRequest("./vacation_detail.jsp", params, response2, "post");
+}
+
+
+function response2() {
+	if(httpRequest.readyState==4) {
+		if(httpRequest.status==200) {
+			var panel = document.getElementById("displayPanel2");
+		
+			panel.innerHTML=httpRequest.responseText;
+		}
+	}
+}
+</script>
+</head>
+<body>
+
+<div id="debugConsole" style="border:1px solid #00000; color:#00ff00; background:#000000"></div>
+<table width="500" height="200" align="center" border="2">
+<tr>
+	<td>
+		<div align="center">Log In</div>
+		<form name="flogin" action="">
+			아이디 : <input type="text" name="id" value=""><br>
+			비밀번호 : <input type="password" name="passwd">
+			<div align="center">
+				<input type="button" value="login" onclick="send(this.form)">
+			</div>
+		</form>
+	</td>
+</tr>
+<tr>
+	<td>
+		<br>
+		<div id="displayPanel"></div>
+	</td>
+</tr>
+<tr>
+	<td>
+		<br>
+		<div id="displayPanel2"></div>
+	</td>
+</tr>
+</table>
+
+</body>
+</html>

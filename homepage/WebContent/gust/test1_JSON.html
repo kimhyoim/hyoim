@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript">
+
+function sendContent() {
+	var content = $("#content").val();
+// 	var id = $("#id").val();
+	
+	$.post(
+		"./get2.jsp",
+		{
+			"content":content
+// 			"id":id
+		}
+		,
+		function(data, textStatus) {
+			$("#content").val("");
+// 			$("#id").val("");
+			callList();
+		}
+	);
+}
+
+
+$(document).ready(function(){
+	callList();
+});
+
+
+
+
+function callList() {
+	$.getJSON(
+			"get-JSON.jsp",
+			response
+	);
+}
+
+function response(result, textStatus) {
+
+	var size = result.length;
+	
+	var i = 0;
+	if(size>0) {
+		$("#panel").hide();
+		for(i=0; i<size; i++) {
+			$("#panel").after(
+			"<div id='"+result[i].num+"+' style='width:25%; margin:auto; margin-bottom:10px; background-color:#aaabbb'>"+
+			"작성자 : <p id='id2'>"+result[i].id+"</p>"+
+			"<p id='wd2'>"+result[i].wdate+"</p>"+
+			"<p id='content2'>"+result[i].content+"</p>"+
+			"<input type='button' value='수정' onclick='updateread("+result[i].num+")'>"+
+			"<input type='button' value='삭제' onclick='delread("+result[i].num+")'>"+
+			"</div>"
+			);
+		}
+	}
+}
+
+function delread(num) {
+	alert("삭제하시겠습니까?");
+	$.post(
+		"./read.jsp",
+		{
+			"num":num
+		}
+		,
+		function(data, textStatus) {
+			result=eval("("+data+")");
+			compareID(result);
+		}
+	)
+}
+
+function compareID(result) {
+	var id = result.id;
+	var num = result.num;
+	
+	$.post(
+		"./compareId.jsp",
+		{
+			"num":num,
+			"id":id
+		}
+		,
+		function(data, textStatus) {
+			result=eval("("+data+")");
+			deleteproc(result);
+		}
+	)
+}
+
+function deleteproc(result) {
+	var str = result.str;
+	alert(str);
+	callList();
+}
+
+function updateread(num) {
+	$.post(
+		"./read.jsp",
+		{
+			"num":num
+		}
+		,
+		function(data, textStatus) {
+			result=eval("("+data+")");
+			updateform(result);
+		}
+	);
+}
+
+
+function updateform(result) {
+	
+	$("#panel #"+result.num).hide();
+	$("#panel").before(
+		"<div style='margin-top:10px; ; background-color:#aaabbb'>"+
+		"<form name='update1' id='update1'>"+
+		"작성자 : <p id='id3'>"+result.id+"<br>"+
+		"<p id='wd3'>"+result.wdate+"</p>"+
+		"<textarea id='content3' rows='3' cols='30'>"+
+		result.content+
+		"</textarea>"+
+		"<input type='button' value='완료' onclick='sendUpdate("+result.num+")'>"+
+		"</form>"+
+		"</div>"+
+		"<br>"
+	);
+
+}
+
+function sendUpdate(num) {
+	var content = $("#content3").val();
+	var id = $("id3").val();
+	var wdate = $("wd3").val();
+	
+	$.post(
+			"./update.jsp",
+			{
+				"content":content,
+				"id":id,
+				"num":num,
+				"wdate":wdate
+			}
+			,
+			function(data, textStatus) {
+				$("#update1").hide();
+				callList();
+			}
+		);
+}
+
+
+</script>
+<style type="text/css">
+div{
+	border:1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div id="input_text" style="margin-top:10px; margin-bottom:10px">
+	<form name="input1" id="input1">
+<!-- 		<input type="text" id="id" value="" size="10"><br> -->
+		<textarea id="content" rows="3" cols="30"></textarea>
+		<input type="button" name="send" value="등록" onclick="sendContent()">
+	</form>
+</div>
+
+<div id="panel" style="margin-bottom:10px; background-color:#aaabbb">작성된 내용이 없습니다.</div>
+
+<div id="paging"></div>
+
+
+</body>
+</html>

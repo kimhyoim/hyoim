@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>homepage</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+    <!-- ************************************************************** --> 
+  <!-- 파일 다운로드 서블릿  
+  접속 주소가 http://127.0.0.1:8000/download로 시작하면 
+  자동으로 utility.FileDownload 클래스가 작동되게 되어 있습니다. 
+  , 프로젝트 전체에서 사용가능 
+  --> 
+  <servlet><!-- 서블릿 이름과 서블릿 클래스 선언 --> 
+    <servlet-name>FileDownload</servlet-name> 
+    <servlet-class>utility.FileDownload</servlet-class> 
+  </servlet> 
+  <servlet-mapping><!-- URL상으로 접근해야하는 경로명 --> 
+    <servlet-name>FileDownload</servlet-name> 
+    <url-pattern>/download</url-pattern> 
+  </servlet-mapping>   
+  <!-- ************************************************************** -->  
+    <filter>
+  	<filter-name>AdminLoginCheckFilter</filter-name>
+  	<!-- 이름은 아무렇게나 해도 됨 -->
+  	<filter-class>utility.AdminLoginCheckFilter</filter-class>
+  	<!-- class는 진짜 구현된 객체를 써야한다. -->
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>AdminLoginCheckFilter</filter-name>
+  	<url-pattern>/admin/*</url-pattern>
+  </filter-mapping>
+</web-app>

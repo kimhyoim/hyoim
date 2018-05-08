@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="./httpRequest.js"></script>
+<script type="text/javascript">
+function send_kor() {
+	sendRequest("coverletter_kor.xml", null, response_kor, "post");
+}
+
+function response_kor() {
+	if(httpRequest.readyState==4) {
+		if(httpRequest.status==200) {
+			var xmlDoc = httpRequest.responseXML;
+			
+			var panel = document.getElementById("panel");
+			panel.innerHTML ="";
+			var paneltitle = document.getElementById("paneltitle");
+			paneltitle.innerHTML = "";
+			
+			var titleList = xmlDoc.getElementsByTagName("title");
+			var indexList = xmlDoc.getElementsByTagName("index");
+			var infoList = xmlDoc.getElementsByTagName("info");
+			
+			var table2 = document.createElement("table");
+			table2.style.width= "40%";
+			table2.style.fontSize = "40px";
+			table2.style.marginBottom = "10px";
+			
+			var title = titleList.item(0).firstChild.nodeValue;
+			
+			var thead = document.createElement("thead");
+			table2.appendChild(thead);
+			
+			thead.insertRow(0);
+			thead.rows[0].insertCell(0);
+			thead.rows[0].cells[0].appendChild(document.createTextNode(title));
+			
+			paneltitle.appendChild(table2);
+			
+			var table = document.createElement("table");
+			table.border = 1;
+			table.width = "60%";
+			table.height = "10%";
+			table.style.borderCollapse = "collapse";
+			table.style.tableLayout = "fixed";
+			table.style.backgroundColor = "black";
+			table.style.margin = "auto";
+			
+			// tbody 생성
+			var tbody = document.createElement("tbody");
+			table.appendChild(tbody);
+			
+			for (var i = 0; i < indexList.length; i++) {
+			    tbody.insertRow(i);
+			    
+			    var index = indexList.item(i);
+			    var info = infoList.item(i);
+			    
+			    var index2 = index.firstChild.nodeValue;
+			    var info2 = info.firstChild.nodeValue;
+			    
+			    
+			    tbody.rows[i].insertCell(0);
+	            tbody.rows[i].cells[0].appendChild(document.createTextNode(index2));
+			    
+	            tbody.rows[i].insertCell(1);
+	            tbody.rows[i].cells[1].appendChild(document.createTextNode(info2));
+	            
+			}  
+			panel.appendChild(table);
+
+		}
+	}
+}
+
+function send_eng() {
+	sendRequest("coverletter_eng.xml", null, response_eng, "post");
+}
+
+function response_eng() {
+	if(httpRequest.readyState==4) {
+		if(httpRequest.status==200) {
+			var xmlDoc = httpRequest.responseXML;
+			
+			var panel = document.getElementById("panel");
+			panel.innerHTML ="";
+			
+			var paneltitle = document.getElementById("paneltitle");
+			paneltitle.innerHTML = "";
+			
+			var titleList = xmlDoc.getElementsByTagName("title");
+			var indexList = xmlDoc.getElementsByTagName("index");
+			var infoList = xmlDoc.getElementsByTagName("info");
+			
+			var table = document.createElement("table");
+			table.border = 1;
+			table.width = "60%";
+			table.style.borderCollapse = "collapse";
+			table.style.tableLayout = "fixed";
+			table.style.backgroundColor = "black";
+			table.style.margin = "auto";
+			
+			var table2 = document.createElement("table");
+			table2.style.width= "40%";
+			table2.style.fontSize = "40px";
+			table2.style.marginBottom = "10px";
+					
+			
+			var title = titleList.item(0).firstChild.nodeValue;
+			
+			var thead = document.createElement("thead");
+			table2.appendChild(thead);
+			
+			thead.insertRow(0);
+			thead.rows[0].insertCell(0);
+			thead.rows[0].cells[0].appendChild(document.createTextNode(title));
+			
+			paneltitle.appendChild(table2);
+			
+			
+			// tbody 생성
+			var tbody = document.createElement("tbody");
+			table.appendChild(tbody);
+			
+			for (var i = 0; i < indexList.length; i++) {
+			    tbody.insertRow(i);
+			    
+			    var index = indexList.item(i);
+			    var info = infoList.item(i);
+			    
+			    var index2 = index.firstChild.nodeValue;
+			    var info2 = info.firstChild.nodeValue;
+			    
+			    
+			    tbody.rows[i].insertCell(0);
+	            tbody.rows[i].cells[0].appendChild(document.createTextNode(index2));
+			    
+	            tbody.rows[i].insertCell(1);
+	            tbody.rows[i].cells[1].appendChild(document.createTextNode(info2));
+	            
+			}  
+			panel.appendChild(table);
+		}
+	}
+}
+
+</script>
+<style type="text/css">
+#title {
+	width:40%;
+	font-size:40px;
+	margin-bottom:10px
+} 
+table {
+	border:1px solid white;
+	width:60%;
+	color:white;
+	border-Collapse:collapse;
+	tableLayout:fixed;
+	background-Color:black;
+	text-align:center;
+	margin:auto;
+}
+th, td {
+	border:1px solid white;
+}
+td {
+	width:50%;
+}
+</style>
+</head>
+<body>
+
+<div id="paneltitle">
+<table id="title">
+	<thead>
+		<tr>
+			<td>자기소개서</td>
+		</tr>
+	</thead>
+</table>
+</div>
+
+<div id="panel">
+<table>
+	<tbody>
+		<tr>
+			<td>이름</td>
+			<td>김효임</td>
+		</tr>
+		<tr>
+			<td>성별</td>
+			<td>남자</td>
+		</tr>
+		<tr>
+			<td>나이</td>
+			<td>28</td>
+		</tr>
+		<tr>
+			<td>핸드폰번호</td>
+			<td>010-4036-6032</td>
+		</tr>
+		<tr>
+			<td>최종학력</td>
+			<td>대졸</td>
+		</tr>
+		<tr>
+			<td>전공/학점</td>
+			<td>천문학,항공우주공학/3.85</td>
+		</tr>
+		<tr>
+			<td>외부활동</td>
+			<td>없음</td>
+		</tr>
+		<tr>
+			<td>어학점수</td>
+			<td>토익:/토스:</td>
+		</tr>
+		<tr>
+			<td>홈페이지 구현기술</td>
+			<td>JAVA/JSP/AJAX</td>
+		</tr>
+	</tbody>
+</table>
+</div>
+<div style="text-align:center; margin-top:5px">
+	<button type="button" onclick="send_kor()">한국어</button>
+	<button type="button" onclick="send_eng()">English</button>
+</div>
+</body>
+</html>

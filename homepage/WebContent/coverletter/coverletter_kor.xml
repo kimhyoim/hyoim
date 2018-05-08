@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kor>
+<title>자기소개서</title>
+
+<index>이름</index>
+<index>성별</index>
+<index>나이</index>
+<index>핸드폰번호</index>
+<index>최종학력</index>
+<index>전공/학점</index>
+<index>외부활동</index>
+<index>어학점수</index>
+<index>홈페이지 구현기술</index>
+
+<info>김효임</info>
+<info>남자</info>
+<info>28</info>
+<info>010-4036-6032</info>
+<info>대졸</info>
+<info>천문학,항공우주공학/3.85</info>
+<info>없음</info>
+<info>토익:/토스:</info>
+<info>JAVA/JSP/AJAX</info>
+</kor>

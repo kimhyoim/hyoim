@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8"/>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+   <title>jQuery Mobile</title>
+   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css"/>
+   <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+   <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+</head>
+<style>
+img{
+width:500px;
+height:500px;
+display:block;
+margin-left:auto;
+margin-right:auto;
+}
+
+</style>
+<body>
+
+<div data-role="page" id="intro1">
+	<div data-role="header">
+		<h1>BrownEyed Soul</h1>
+		<a href="#" class="ui-btn-right">소개</a>
+	</div>
+	<div data-role="content" style="text-align:center">
+		<img id="intropic" src="./soulcookie.jpg" data-inline="true">
+		<a href="#intro3" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">좌</a>
+		<a href="#intro2" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">우</a>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h1>welcome</h1>
+	</div>
+</div>
+
+<div data-role="page" id="intro2">
+	<div data-role="header">
+		<h1>BrownEyed Soul</h1>
+		<a href="#" class="ui-btn-right">소개</a>
+	</div>
+	<div data-role="content" style="text-align:center">
+		<img id="intropic" src="./browneyed1.jpg">
+		<a href="#intro1" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">좌</a>
+		<a href="#intro3" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">우</a>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h1>welcome</h1>
+	</div>
+</div>
+
+<div data-role="page" id="intro3">
+	<div data-role="header">
+		<h1>BrownEyed Soul</h1>
+		<a href="#" class="ui-btn-right">소개</a>
+		
+	</div>
+	<div data-role="content" style="text-align:center">
+		<img id="intropic" src="./browneyed2.jpg">
+		<a href="#intro2" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">좌</a>
+		<a href="#intro1" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">우</a>
+	</div>
+	<div data-role="footer" data-position="fixed">
+		<h1>welcome</h1>
+	</div>
+</div>
+
+</body>
+</html>

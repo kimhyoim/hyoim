@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript">
+function sendContent() {
+	var content = $("#content").val();
+	var id = $("#id").val();
+	
+	$.post(
+		"./get2.jsp",
+		{
+			"content":content,
+			"id":id
+		}
+		,
+		function(data, textStatus) {
+// 			alert(textStatus);
+			result=eval("("+data+")");
+			display(result);
+		}
+	);
+}
+
+function display(result) {
+	
+	
+	$("#panel").hide();
+	$("#panel").before(
+		"<div style='margin-top:10px; background-color:#aaabbb'>"+
+		"작성자 : "+result.id+"<br>"+
+		result.content+
+		"<input type='button' value='수정' onclick='updateform(result)'>"+
+		"</div>"+
+		"<br>"
+	);
+	$("#content").val("");
+	$("#id").val("");
+}
+
+function updateform(result) {
+
+	$("#panel").hide();
+	$("#panel").before(
+		"<div style='margin-top:10px; ; background-color:#aaabbb'>"+
+		"<form name='update1' id='update1'>"+
+		"작성자 : "+result.id+"<br>"+
+		"<textarea id='updatecon' rows='3' cols='30'>"+
+		result.content+
+		"</textarea>"+
+		"<input type='button' value='완료' onclick='sendUpdate()'>"+
+		"</form>"+
+		"</div>"+
+		"<br>"
+	);
+	$("#content").val("");
+	$("#id").val("");
+}
+</script>
+<style type="text/css">
+div{
+	border:1px solid black;
+}
+</style>
+</head>
+<body>
+
+<div id="input_text" style="margin-top:10px; margin-bottom:10px">
+	<form name="input1" id="input1">
+		<input type="text" id="id" value="" size="10"><br>
+		<textarea id="content" rows="3" cols="30"></textarea>
+		<input type="button" name="send" value="등록" onclick="sendContent()">
+	</form>
+</div>
+
+<div id="panel" style="margin-bottom:10px; ; background-color:#aaabbb">작성된 내용이 없습니다.</div>
+
+
+</body>
+</html>

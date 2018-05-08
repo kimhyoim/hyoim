@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="./jquery.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function(){
+	callList();
+});
+
+//getJSON과 post의 차이점과 쓰는 방법을 알아야될듯.
+//[08] jQuery Ajax에 참고
+
+function callList() {
+	$.getJSON(
+			"get-JSON.jsp",
+			response
+	);
+}
+
+function callPagingList(num) {
+	$.post(
+		"paging.jsp",
+		{
+			"nowPage":num
+		}
+		,
+		response
+	);
+}
+
+function response(result, textStatus) {
+
+	var size = result.length;
+	
+	var i = 0;
+	if(size>0) {
+		$("#panel").hide();
+		for(i=0; i<size; i++) {
+			$("#panel").after(
+			"<div id='"+result[i].num+"+' style='width:25%; margin:auto; margin-bottom:10px; background-color:#aaabbb'>"+
+			"작성자 : <p id='id2'>"+result[i].id+"</p>"+
+			"<p id='wd2'>"+result[i].wdate+"</p>"+
+			"<p id='content2'>"+result[i].content+"</p>"+
+			"<input type='button' value='수정' onclick='updateread("+result[i].num+")'>"+
+			"<input type='button' value='삭제' onclick='delread("+result[i].num+")'>"+
+			"</div>"
+			);
+		}
+	}
+}
+
+</script>
+<style type="text/css">
+div{
+	border:1px solid black;
+}
+</style>
+</head>
+<body>
+
+<input type="button" value="버튼" onclick="callPagingList(2)">
+<div id="panel" style="margin-bottom:10px; background-color:#aaabbb">작성된 내용이 없습니다.</div>
+
+
+
+</body>
+</html>
