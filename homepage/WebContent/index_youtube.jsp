@@ -99,7 +99,7 @@
         <li class="w3-padding">2015 <span class="w3-badge w3-right w3-margin-right">2</span></li>
         <li class="w3-padding">2016 <span class="w3-badge w3-right w3-margin-right">0</span></li>
         <li class="w3-padding">2017 <span class="w3-badge w3-right w3-margin-right">1</span></li>
-        <li class="w3-padding">2018 <span class="w3-badge w3-right w3-margin-right">0</span></li>
+        <li class="w3-padding">2018 <span class="w3-badge w3-right w3-margin-right">1</span></li>
       </ul>
 
       <div class="w3-row-padding w3-padding-32" style="margin:0 -16px">
